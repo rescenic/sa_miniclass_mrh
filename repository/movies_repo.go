@@ -31,16 +31,39 @@ func GetDataMovies() ([]*entity.Movies, error) {
 	return mapper.MapToEntity(result), nil
 }
 
-func AddMovie(newMovie entity.MoviesDTO) error {
+func AddMovie(newMovie entity.MoviesDTO) (int64, error) {
 	db, err := config.MySQLConnection()
 	if err != nil {
-		return err
+		return 0, err
 	}
 
-	_, errExec := db.Exec("INSERT INTO movies(title, overview, poster) VALUES (?, ?, ?)", newMovie.Title, newMovie.Overview, newMovie.Poster)
-	if errExec != nil {
-		return errExec
+	result, err := db.Exec("INSERT INTO movies(title, overview, poster) VALUES (?, ?, ?)", newMovie.Title, newMovie.Overview, newMovie.Poster)
+	if err != nil {
+		return 0, err
 	}
 
-	return nil
+	id, err := result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+}
+
+func GetMovieByID(id int64) (*entity.Movies, error) {
+	db, err := config.MySQLConnection()
+	if err != nil {
+		return nil, err
+	}
+
+	row := db.QueryRow("SELECT * FROM movies WHERE id = ?", id)
+
+	var dto entity.MoviesDTO
+	errScan := row.Scan(&dto.ID, &dto.Title, &dto.Overview, &dto.Poster)
+	if errScan != nil {
+		return nil, errScan
+	}
+
+	movie := mapper.MapToEntity([]entity.MoviesDTO{dto})[0]
+	return movie, nil
 }

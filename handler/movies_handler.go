@@ -57,14 +57,29 @@ func AddMovieHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Add the new movie to the database
-	err = repository.AddMovie(newMovieDTO)
+	id, err := repository.AddMovie(newMovieDTO)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
+	// Get the added movie from the database
+	addedMovieDTO, err := repository.GetMovieByID(id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Convert addedMovieDTO to an entity.Movies instance
+	addedMovie := entity.Movies{
+		ID:       addedMovieDTO.ID,
+		Title:    addedMovieDTO.Title,
+		Overview: addedMovieDTO.Overview,
+		Poster:   addedMovieDTO.Poster,
+	}
+
 	// Return the added movie as JSON response
-	jsonResp, err := response.MapResponseSingleMovie(&newMovie)
+	jsonResp, err := response.MapResponseSingleMovie(&addedMovie)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
