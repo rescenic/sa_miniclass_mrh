@@ -1,6 +1,6 @@
 # Assignment Mini Class Golang Salt Academy
 
-### Muhammad Ridwan Hakim, S.T.<hr>
+### [Muhammad Ridwan Hakim, S.T.](https://github.com/rescenic)<hr>
 
 ## Assignment Tasks
 1. Buat API dengan http method GET & POST
@@ -18,3 +18,5 @@
 -  : Post A Movies<br>
 
 ## Screenshots
+
+## Website: [rescenic](https://github.com/rescenic/sa_miniclass_mrh)
