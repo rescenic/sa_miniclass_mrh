@@ -30,3 +30,17 @@ func GetDataMovies() ([]*entity.Movies, error) {
 
 	return mapper.MapToEntity(result), nil
 }
+
+func AddMovie(newMovie entity.MoviesDTO) error {
+	db, err := config.MySQLConnection()
+	if err != nil {
+		return err
+	}
+
+	_, errExec := db.Exec("INSERT INTO movies(title, overview, poster) VALUES (?, ?, ?)", newMovie.Title, newMovie.Overview, newMovie.Poster)
+	if errExec != nil {
+		return errExec
+	}
+
+	return nil
+}

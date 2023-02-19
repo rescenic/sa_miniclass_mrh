@@ -1,10 +1,10 @@
 package entity
 
 type Movies struct {
-	id       int
-	title    string
-	overview string
-	poster   string
+	ID       int
+	Title    string
+	Overview string
+	Poster   string
 }
 
 type MoviesDTO struct {
@@ -16,27 +16,27 @@ type MoviesDTO struct {
 
 func CreateMovies(dto MoviesDTO) *Movies {
 	movies := &Movies{
-		id:       dto.ID,
-		title:    dto.Title,
-		overview: dto.Overview,
-		poster:   dto.Poster,
+		ID:       dto.ID,
+		Title:    dto.Title,
+		Overview: dto.Overview,
+		Poster:   dto.Poster,
 	}
 
 	return movies
 }
 
-func (b *Movies) GetID() int {
-	return b.id
+func (m *Movies) GetID() int {
+	return m.ID
 }
 
-func (b *Movies) GetTitle() string {
-	return b.title
+func (m *Movies) GetTitle() string {
+	return m.Title
 }
 
-func (b *Movies) GetOverview() string {
-	return b.overview
+func (m *Movies) GetOverview() string {
+	return m.Overview
 }
 
-func (b *Movies) GetPoster() string {
-	return b.poster
+func (m *Movies) GetPoster() string {
+	return m.Poster
 }

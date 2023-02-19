@@ -39,3 +39,14 @@ func EntityToJson(movies _interface.MoviesInterface) *JSONListMovies {
 
 	return jsonSingle
 }
+
+func MapResponseSingleMovie(movie *entity.Movies) ([]byte, error) {
+	jsonSingle := EntityToJson(movie)
+
+	byteJson, err := json.Marshal(jsonSingle)
+	if err != nil {
+		return nil, err
+	}
+
+	return byteJson, nil
+}
