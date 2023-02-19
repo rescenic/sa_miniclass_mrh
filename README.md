@@ -10,9 +10,16 @@
 ## Assets
 - movies.json (src: [meilisearch](https://docs.meilisearch.com/learn/getting_started/quick_start.html#add-documents))<br>
 - movies.py (Menghapus object "genre" dan "release_date")<br>
-- moviesv2.json (Dimasukkan ke DB MySQL)<br>
+- moviesv2.json (Data Sampel)<br>
 
-## Endpoints
+## Panduan
+1. Masuk ke terminal (PowerShell/Git Bash)
+1. git clone https://github.com/rescenic/sa_miniclass_mrh.git
+2. cd sa_miniclass_mrh
+3. go run main.go
+4. Buka Postman, silakan menggunakan Katalog Web Service tersedia.
+
+## Katalog Web Service
 - http://localhost:8082 : Get Status - Home<br>
 - http://localhost:8082/movies/ : Get List Movies<br>
 -  : Post A Movies<br>
